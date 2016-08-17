@@ -1,0 +1,75 @@
+@font-face {
+  font-family: "Ubuntu";
+  src: "Ubuntu.ttf" format("truetype"); }
+
+html, body {
+  font-family: 'Ubuntu' , sans-serif; }
+
+p {
+  font-size: 16px;
+  color: #262626; }
+
+section {
+  width: 100%;
+  padding: 85px 0 85px 0;
+  background-color: #3578E8;
+  text-align: center; }
+
+section > h1 {
+  font-size: 50px; }
+
+#secondSection {
+  background-color: #e1dada;
+  /*transition: all 0.25s linear;*/
+  will-change: color; }
+
+#break {
+  background-color: black;
+  padding-top: 1px;
+  padding-bottom: 1px; }
+
+#specialBreak {
+  width: 2px;
+  background-color: black; }
+
+#leftSection, #rightSection {
+  width: 50%;
+  color: white; }
+
+#leftSection {
+  background-color: #3333FF; }
+
+#leftSection:hover {
+  background-color: blue;
+  cursor: pointer; }
+
+#rightSection {
+  background-color: #FF3333; }
+
+#rightSection:hover {
+  background-color: red;
+  cursor: pointer; }
+
+#divToFlex {
+  display: flex; }
+
+h1, p {
+  pointer-events: none; }
+
+#firstSection {
+  background-image: url("../background.png");
+  background-repeat: no-repeat;
+  color: white; }
+
+#firstSection > p {
+  color: white; }
+
+.lastSection {
+  height: 500px;
+  animation: colorSwitch 10s linear infinite alternate; }
+
+@keyframes colorSwitch {
+  0% {
+    background-color: black; }
+  100% {
+    background-color: white; } }
