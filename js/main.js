@@ -65,6 +65,9 @@ function saveChoice (key, data) {
 
 function load(key, varToStore) {
 	var item = window.localStorage.getItem(key);
+	if (item === null || item === undefined) {
+		return realState(varToStore);
+	}
 	if (isBool(item)) {
 		varToStore = strToBool(item);
 	}
@@ -87,9 +90,13 @@ function strToBool(to) {
 		return false;
 	}
 }
+function realState(variable) {
+	return variable;
+}
 choice = load("choice", choice);
 gotChoice = load("gotChoice", gotChoice);
 savedInDatabase = load("savedInDatabase", savedInDatabase);
+
 console.log(choice);
 console.log(gotChoice);
 console.log(savedInDatabase);
