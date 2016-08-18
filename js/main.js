@@ -70,9 +70,13 @@ $('#getUsers').click(function () {
         twitchUser = res;
         console.log("saved in " + "twitchUser");
         console.log("-----");
-        for(var shit in twitchUser) {
-          console.log(twitchUser[shit]);
-        } 
+        console.log(twitchUser);
+        if ($("#twitchText").val() === "games/top") {
+          for(var shit in twitchUser.top) {
+            console.log(twitchUser.top[shit].game.name);
+            console.log(twitchUser.top[shit].game.popularity);
+          }
+        }
       },
       error: function () { console.log("Error getting twitch.tv api"); }
 
