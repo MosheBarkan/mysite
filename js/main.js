@@ -60,27 +60,7 @@ var twitchUserAsk
 $('#getUsers').click(function () {
   if ($("#twitchText").val().length > 0) {
     twitchUserAsk = $("#twitchText").val();
-  
-    $.ajax({
-      type: "GET",
-      crossDomain: true,
-      url: "https://api.twitch.tv/kraken/" + twitchUserAsk,
-      dataType: "json",
-      success: function (res) {
-        twitchUser = res;
-        console.log("saved in " + "twitchUser");
-        console.log("-----");
-        console.log(twitchUser);
-        if ($("#twitchText").val() === "games/top") {
-          for(var shit in twitchUser.top) {
-            console.log(twitchUser.top[shit].game.name);
-            console.log(twitchUser.top[shit].game.popularity);
-          }
-        }
-      },
-      error: function () { console.log("Error getting twitch.tv api"); }
-
-    });
+    twitchAjax(twitchUserAsk);
   }    
   });
 
@@ -125,11 +105,35 @@ console.log(savedInDatabase);
 
 
 
+function twitchAjax(keyname) {
+      $.ajax({
+      type: "GET",
+      crossDomain: true,
+      url: "https://api.twitch.tv/kraken/" + keyname,
+      dataType: "json",
+      success: function (res) {
+        twitchUser = res;
+        console.log("saved in " + "twitchUser");
+        console.log("-----");
+        console.log(twitchUser);
+        if (keyname === "games/top" || keyname === "games/top/") {
+          for(var shit in twitchUser.top) {
+            console.log(twitchUser.top[shit].game.name);
+            console.log(twitchUser.top[shit].game.popularity);
+          }
+        }
+        else if (keyname === "streams" || keyname === "streams/") {
+          for(let shit = 0;shit<twitchUser.streams.length;shit++){
+              console.log("----");
+              console.log("Game: " + twitchUser.streams[shit].game);
+              console.log("User: " + twitchUser.streams[shit].channel.name + "  Viewers: " + twitchUser.streams[shit].viewers);
+           }
+        }
+        else if (keyname === "streams/summary" || keyname === "streams/summary/") {
+          console.log("currently there are " + twitchUser.channels + " streaming and " + twitchUser.viewers + " watching in total");
+        }
+      },
+      error: function () { console.log("Error getting twitch.tv api"); }
 
-
-
-
-
-
-//for(var shit in temp1.follows) {
-//console.log(temp1.follows[shit].user.name); } 
+    });
+}
